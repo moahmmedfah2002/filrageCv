@@ -1,0 +1,36 @@
+#dash{
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 10px;
+}
+#footer{
+    margin-top: 100px;
+    margin-bottom: 50px;
+    color: black;
+}
+.stat{
+    width:20%;
+    height: 200px;
+    background-image: linear-gradient(195deg, #42424a94 0%, #737272 100%);
+    border: none;
+    border-radius: 10px;
+    margin: 2%;
+    
+}
+.stat-h1-1{
+    color: #f0eded;
+    margin-top: 10%;
+}
+.stat-h1-2{
+    color: #f0eded;
+    margin-top: 5%;
+}
+.nav-bar{
+    background-image:linear-gradient(195deg, #b4b4c344 0%, #bfb6b637 100%) ;
+    border:none;
+    border-bottom: 50px;
+}
+.nav-container{
+    margin-top: 1%;
+    margin-bottom: 3%;
+}
