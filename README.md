@@ -1,2 +1,2 @@
 # filrageCv
-filre pour postulation des cv afin de geré les postulation a un stage
+site web avec Django pour postulation des cv afin de geré les postulations a un stage
