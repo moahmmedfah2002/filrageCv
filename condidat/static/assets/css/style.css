@@ -1,0 +1,37 @@
+.banner-container{
+    max-height: 200px;
+    overflow: hidden;
+}
+.banner{
+    width:100%;
+    height:70%
+}
+.footer{
+    width:100%;
+}
+.brand{
+    font-weight: bold;
+    
+}
+.gi{
+    width:60px;
+    height:100%;
+}
+.s-main{
+    margin-top: 10px;
+}
+li{
+    border-radius: 9px;
+    transition: 0.3s ;
+}
+
+li:hover{
+   
+   background-color: #344767;
+}
+.nav-link:hover{
+    color: white !important;
+}
+ul{
+    gap:20px;
+}
