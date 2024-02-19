@@ -1,0 +1,207 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
+  <title>
+    Material Kit 2 by Creative Tim
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'assets/css/material-kit.css' %}" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+
+<body class="sign-in-basic">
+  
+  
+  <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');" loading="lazy">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <div class="container my-auto " >
+      <div class="row " style="margin-top:100px;">
+        <div class="col-lg-4 col-md-8 col-12 mx-auto">
+          <div class="card z-index-0 fadeIn3 fadeInBottom">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign up</h4>
+               
+              </div>
+            </div>
+            <div class="card-body">
+<!--         choix condidat recriteur                    -->
+            <div class="container text-center">
+              
+             
+                <button type="button" class="btn btn-primary" onclick="recruteur()" >recruteur</button>
+                <button type="button" class="btn btn-primary" onclick="condidat()">condidat</button>
+                <script>
+                  
+                    function recruteur(){
+                                let message=document.getElementById("message");
+                                let formActive=document.getElementById("recruteur-div");
+                                let formDesactive=document.getElementById("condidat-div");
+                                formActive.style.display="block";
+                                formDesactive.style.display="none";
+                                message.style.display="none";
+                    }
+                    function condidat(){
+                                let message=document.getElementById("message");
+                                let formActive=document.getElementById("condidat-div");
+                                let formDesactive=document.getElementById("recruteur-div");
+                                formActive.style.display="block";
+                                formDesactive.style.display="none";
+                                message.style.display="none";
+                    }
+                </script>
+                <br>
+              <h5 id="message">{{erreur}}</h5>
+            </div>   
+<!--         fin choix recriteur condidat                                            -->
+           
+
+
+
+
+{% csrf_token %}
+
+        <div id="recruteur-div" style="display: none;">
+        <form role="form" class="text-start" id="recriteur" method="post">
+        <input type="hidden" name="type" value="recruteur">
+        <div class="input-group input-group-outline my-3">
+    
+       <input type="email" class="form-control" name="email" placeholder="Email" required>
+       </div>
+      <div class="input-group input-group-outline mb-3">
+        
+        <input type="text" class="form-control" name="nom" placeholder="Nom" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+       
+        <input type="text" class="form-control" name="prenom" placeholder="Prenom" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+        
+        <input type="tel" class="form-control" name="tel" placeholder="Téléphone" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+        
+        <input type="text" class="form-control" name="entreprise" placeholder="entreprise" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+        
+        <input type="text" class="form-control" name="numero_patent" placeholder="Numéro Patent" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+       
+        <input type="password" class="form-control" name="password" placeholder="Password" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+       
+        <input type="password" class="form-control" name="confirmation" placeholder="Confirme Password" required>
+      </div>
+   
+    <div class="text-center">
+      <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign up</button>
+    </div>
+    
+        </form>
+        </div>
+
+        <div id="condidat-div" style="display: none;">
+         <form role="form" class="text-start" method="post" action="" >
+    <input type="hidden" name="type" value="condidat">
+    <div class="input-group input-group-outline my-3">
+      <label class="form-label"></label>
+      <input type="email" class="form-control" name="email" placeholder="Email" required>
+    </div>
+    <div class="input-group input-group-outline mb-3">
+        <label class="form-label"></label>
+        <input type="text" class="form-control" name="nom" placeholder="Nom" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+        
+        <input type="text" class="form-control" name="prenom" placeholder="Prenom" required>
+      </div>
+      <div class="input-group input-group-outline mb-3">
+        
+        <input type="tel" class="form-control" name="tel"  placeholder="Téléphone" pattern="[0-9]{10}" required>
+      </div>
+      
+    <div class="input-group input-group-outline mb-3">
+      
+      <input type="password" class="form-control" name="password"  placeholder="Password" required>
+    </div>
+    <div class="input-group input-group-outline mb-3">
+        
+        <input type="password" class="form-control" name="confirmation"  placeholder="confirme Password" required>
+      </div>
+   
+    <div class="text-center">
+      <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2"> <a href="home.html">Sign up</a></button>
+    </div>
+    
+         </form>
+        </div>
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+    <footer class="footer  " style="margin-top: 100px; margin-bottom: 100px;">
+      <div class="container ">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-3 col-md-3 " style="width: 100%;">
+            <div class="copyright text-center text-sm text-white text-center">
+              © 2024,
+              made by computer science club ENSA-MARRAKESH
+              
+            </div>
+          </div>
+         </div>
+         </div>
+        <script>
+          // Récupérer la réponse JSON à partir de la vue Django
+          const reponseJson = {
+              "message": "Vous êtes bien inscrit !",
+              "nom": "John Doe",
+              "email": "john.doe@example.com",
+              "telephone": "123-456-7890"
+          };
+  
+          // Créer une chaîne HTML pour afficher les données JSON
+          const htmlString = `
+              <p><strong>Message :</strong> ${reponseJson.message}</p>
+          `;
+  
+          // Insérer la chaîne HTML dans l'élément avec l'ID "reponse-json"
+          document.getElementById('reponse-json').innerHTML = htmlString;
+        </script>
+  </body>
+  </body>
+         </footer>
+  <!--   Core JS Files   -->
+  <!-- <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script> -->
+  <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+  <script src="../assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script> -->
+</body>
+
+</html>
