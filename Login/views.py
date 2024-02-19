@@ -42,7 +42,7 @@ def logup(request):
                 numero=request.POST["numero_patent"]
                 prenom=request.POST["prenom"]
                 password=request.POST["password"]
-                query=cur.execute("insert into Login_recruteur(email,nom,prenom,telephone,entreprise,numero_patent,password) values('{}','{}','{}','{}','{}',{},{})".format(email,nom,prenom,tel,entreprise,numero,password))
+                query=cur.execute("insert into Login_recruteur(email,nom,prenom,telephone,entreprise,numero_patent,password) values('{}','{}','{}','{}','{}','{}','{}')".format(email,nom,prenom,tel,entreprise,numero,password))
                 cur.commit()
                 return redirect('/Login')
 
