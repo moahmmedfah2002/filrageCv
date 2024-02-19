@@ -80,6 +80,3 @@ def login(request):
         
     
     
-
-
-
