@@ -1,3 +1,49 @@
+.bar div{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+table{
+    width: 90%;
+}
+th{
+    border: solid black 2px;
+    color: black;
+    padding: 5px;
+}
+thead th{
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+tr{
+    padding: 10px;
+}
+tr:nth-child(odd) {background-color: rgb(206, 206, 206);}
+tr:nth-child(even) {background-color: #636363;}
+.home,.profile{
+    color: black;
+}
+h1{
+    margin: 50px;
+}
+.home:hover,.profile:hover{
+    color:#0371b6;
+}
+.bar{
+    padding: min(10%,10px);
+    width: 100%;
+    background-color: white;
+}
+.blog-author{
+    background-color: rgb(173, 173, 173);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ul{
+    list-style: none;
+    width: 100%;
+}
 
 .page-header{
     background-color: gray;
