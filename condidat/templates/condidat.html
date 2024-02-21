@@ -1,175 +1,276 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Liste des offres d'emploi</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			*::-webkit-scrollbar {
+				width: 10px;
+				background: #ccc;
+			}
+			*::-webkit-scrollbar-thumb {
+				background: #f4f4f4;
+				border-radius: 10px;
+			}
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
-  <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
-  <title>
-    Offres d'emploi
-  </title>
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <!-- Nucleo Icons -->
-  <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet" />
-  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-  <!-- CSS Files -->
-  <link id="pagestyle" href="{% static 'assets/css/material-kit.css' %}" rel="stylesheet" />
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-</head>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f4f4f4;
+			}
 
-<body style="min-height: 100vh;">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand brand" href="#"><img src="{% static 'assets/img/logo-gi.png' %}" class="gi"/>Club GI</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">À propos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="banner-container">
-    <img src="{% static 'assets/img/career-banner.png' %}" class="banner"/>
-</div>
+			.main {
+				width: calc(100% - 40px);
+				max-width: 2000px;
+				margin-inline: auto;
+				margin-bottom: 20px;
 
-  <div class="container s-main">
-    <h1>Liste des offres d'emploi</h1>
-    <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <!-- Sidebar for filters -->
-            <div class="sidebar">
-              <h3>Filtres</h3>
-              <select id="filterSelect" class="form-select mb-3 " onchange="filterAnnonces()">
-                <option value="all">Tous</option>
-                <option value="ville">Ville</option>
-                <option value="entreprise">Entreprise</option>
-              </select>
-              <input type="text" id="filterInput" class="form-control mb-3" onkeyup="filterAnnonces()" placeholder="Rechercher...">
-            </div>
-          </div>
-        </div>
-    </div>
-    <div id="annonces-container" class="row">
-      <!-- Les annonces seront insérées ici dynamiquement -->
-    </div>
-  </div>
+				@media screen and (width <= 640px) {
+					width: calc(100% - 20px);
+					margin-bottom: 10px;
+				}
 
-  <footer class="footer py-4 bg-dark text-white ">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <p class="mb-0">© <script>document.write(new Date().getFullYear())</script>, made by computer science club ENSA-MARRAKESH</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+				header {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
 
-  <!-- JS Files -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
-  <script>
-    // Simuler des annonces d'emploi (remplacez ceci par une requête réelle à votre backend)
-    const annonces = [
-    { "id": 1, "titre": "Développeur Web", "entreprise": "XYZ Corp", "lieu": "Marrakech", "description": "Nous recherchons un développeur web expérimenté pour rejoindre notre équipe." },
-    { "id": 2, "titre": "Ingénieur Logiciel", "entreprise": "ABC Ltd", "lieu": "Casablanca", "description": "Nous sommes à la recherche d'un ingénieur logiciel passionné pour travailler sur des projets excitants." },
-    { "id": 3, "titre": "Designer UX/UI", "entreprise": "123 Corp", "lieu": "Rabat", "description": "Rejoignez notre équipe en tant que designer UX/UI et aidez-nous à créer des expériences utilisateur exceptionnelles." },
-    { "id": 4, "titre": "Développeur Web", "entreprise": "XYZ Corp", "lieu": "Marrakech", "description": "Nous recherchons un développeur web expérimenté pour rejoindre notre équipe." },
-    { "id": 5, "titre": "Développeur Web", "entreprise": "XYZ Corp", "lieu": "Marrakech", "description": "Nous recherchons un développeur web expérimenté pour rejoindre notre équipe." },
-    { "id": 6, "titre": "Développeur Web", "entreprise": "XYZ Corp", "lieu": "Marrakech", "description": "Nous recherchons un développeur web expérimenté pour rejoindre notre équipe." },
-    { "id": 7, "titre": "Développeur Web", "entreprise": "XYZ Corp", "lieu": "Marrakech", "description": "Nous recherchons un développeur web expérimenté pour rejoindre notre équipe." },
-    { "id": 8, "titre": "Développeur Web", "entreprise": "XYZ Corp", "lieu": "Marrakech", "description": "Nous recherchons un développeur web expérimenté pour rejoindre notre équipe." },
-    { "id": 9, "titre": "Développeur Web", "entreprise": "XYZ Corp", "lieu": "Marrakech", "description": "Nous recherchons un développeur web expérimenté pour rejoindre notre équipe." }
-];
+					background: #007bff;
+					color: #fff;
+					padding: 2rem;
 
+					.search-bar {
+						display: flex;
+						align-items: center;
+						gap: 1rem;
 
-    // Fonction pour afficher les annonces
-    function afficherAnnonces() {
-      const annoncesContainer = document.getElementById('annonces-container');
+						.search-bar-input {
+							font-weight: bold;
+							padding: 10px;
+							border: none;
+							outline: none;
+							border-radius: 20px;
+							width: 250px;
+						}
 
-      // Boucler à travers chaque annonce et créer un élément HTML pour l'afficher
-      annonces.forEach((annonce, index) => {
-        const annonceHTML = `
-          <div class="col-md-4 mb-4"> 
-            <a href="/annonce/${annonce.id}" class="card-link">
-              <div class="card h-100"> 
-                  <div class="card-body d-flex flex-column h-100"> 
-                      <h5 class="card-title">${annonce.titre}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">${annonce.entreprise} - ${annonce.lieu}</h6>
-                      <p class="card-text">${annonce.description}</p>
-                  </div>
-              </div>
-            </a>
-          </div>
-        `;
-        annoncesContainer.innerHTML += annonceHTML;
-      });
-    }
+						.search-bar-button {
+							font-weight: bold;
+							color: #fff;
+							border: 1px solid #fff;
+							background: transparent;
+							border-radius: 20px;
+							padding: 10px 20px;
+							cursor: pointer;
+							transition: 0.3s ease;
 
-    // Appel de la fonction pour afficher les annonces lors du chargement de la page
-    window.onload = afficherAnnonces;
+							&:hover {
+								color: #007bff;
+								border-color: currentColor;
+								background: #fff;
+							}
+						}
+					}
+				}
 
-    // Fonction pour filtrer les annonces
-    function filterAnnonces() {
-        const select = document.getElementById('filterSelect');
-        const input = document.getElementById('filterInput').value.toLowerCase();
-        const annoncesContainer = document.getElementById('annonces-container');
-        annoncesContainer.innerHTML = ''; // Effacer les annonces actuelles
-  
-        // Filtrer les annonces en fonction de l'option sélectionnée
-        switch (select.value) {
-          case 'ville':
-            annonces.filter(annonce => annonce.lieu.toLowerCase().includes(input)).forEach(annonce => afficherAnnonce(annonce));
-            break;
-          case 'entreprise':
-            annonces.filter(annonce => annonce.entreprise.toLowerCase().includes(input)).forEach(annonce => afficherAnnonce(annonce));
-            break;
-          default:
-            annonces.forEach(annonce => afficherAnnonce(annonce));
-            break;
-        }
-      }
-  
-      // Fonction pour afficher une annonce
-      function afficherAnnonce(annonce) {
-        const annoncesContainer = document.getElementById('annonces-container');
-        const annonceHTML = `
-          <div class="col-md-4 mb-4"> 
-            <a href="/annonce/${annonce.id}" class="card-link">
-              <div class="card h-100"> 
-                  <div class="card-body d-flex flex-column h-100"> 
-                      <h5 class="card-title">${annonce.titre}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">${annonce.entreprise} - ${annonce.lieu}</h6>
-                      <p class="card-text">${annonce.description}</p>
-                  </div>
-              </div>
-            </a>
-          </div>
-        `;
-        annoncesContainer.innerHTML += annonceHTML;
-      }
-  </script>
-</body>
+				.job-offers-header {
+					margin-top: 2rem;
+					margin-bottom: 0.5rem;
+					color: #007bff;
+					text-decoration: underline;
+				}
 
+				.job-offers-container {
+					display: grid;
+					gap: 1rem;
+					grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+
+					.offer {
+						display: flex;
+						flex-direction: column;
+						gap: 0.75rem;
+						border: 1px solid rgba(128, 128, 128, 0.8);
+						border-radius: 0.5rem;
+						padding: 1rem;
+						font-size: 1.25rem;
+						background: #fff;
+						box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+							rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+						.offer-title {
+							color: #007bff;
+							font-size: 20px;
+							font-weight: bold;
+						}
+
+						.offer-description {
+							font-size: 1rem;
+						}
+
+						.offer-skills {
+							display: flex;
+							gap: 0.5rem;
+
+							strong {
+								font-size: 1rem;
+							}
+
+							.skills-container {
+								display: flex;
+								flex-wrap: wrap;
+								gap: 0.5rem;
+
+								small {
+									background: #f4f4f4;
+									border: 1px #ccc solid;
+									padding: 0.25rem 0.75rem;
+									font-size: 14px;
+									border-radius: 1rem;
+								}
+							}
+						}
+
+						.offer-apply-button {
+							background: #007bff;
+							color: #fff;
+							border: none;
+							border-radius: 5px;
+							padding: 0.5rem 1.5rem;
+							font-size: 1rem;
+							cursor: pointer;
+							transition: background 0.3s ease;
+							width: max-content;
+
+							&:hover {
+								background: #0056b3;
+							}
+						}
+					}
+				}
+			}
+
+			#home {
+				background-color: #e96cce;
+				padding-bottom: 1cm;
+				margin-left: -1cm;
+				margin-right: -1cm;
+				margin-top: -1cm;
+				padding-top: 1.3cm;
+				padding-bottom: 2cm;
+				height: 5mm;
+			}
+			.topmenu {
+				color: white;
+				margin: 10px;
+				padding: 20px;
+				font-size: 20px;
+				text-decoration: none;
+			}
+			.topmenu:hover {
+				color: white;
+				font-weight: bolder;
+				text-decoration: underline;
+				padding-top: 100px;
+				/* Add the styles here */
+			}
+
+			.topdiv {
+				float: right;
+				padding-right: 1cm;
+			}
+			.dropdown-content {
+				display: none;
+				position: absolute;
+				background-color: #007bff;
+				min-width: 160px;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+				z-index: 1;
+			}
+
+			.dropdown-content a {
+				color: white;
+				padding: 12px 16px;
+				text-decoration: none;
+				display: block;
+			}
+
+			.dropdown-content a:hover {
+				background-color: #004080;
+			}
+			.recommendation:hover .dropdown-content {
+				display: block;
+			}
+
+			.user-image {
+				width: 40px; /* Vous pouvez ajuster la taille selon vos besoins */
+				height: 40px;
+
+				border-radius: 50%; /* Pour créer un cercle */
+				display: flex;
+				overflow: hidden; /* Pour cacher les parties de l'image qui dépassent du cercle */
+				margin-left: 110px; /* Pour ajouter un espacement à droite de l'image */
+			}
+		</style>
+	</head>
+	<body>
+		<section class="main">
+			<header>
+				<form
+					action="{% url 'search-job-offers' %}"
+					method="GET"
+					class="search-bar"
+				>
+					<input
+						class="search-bar-input"
+						type="text"
+						name="search"
+						placeholder="Recherche d'offres"
+					/>
+					<button type="submit" class="search-bar-button">Rechercher</button>
+				</form>
+				<!-- <div class="topdiv">
+					<div class="recommendation">
+						<div class="user-image">
+							<img src="" alt="Image utilisateur" width="50" height="50" />
+						</div>
+					</div>
+					<a class="topmenu" href="#recommendation">Mon Profile </a>
+
+					<div class="dropdown-content">
+						<a href="#">Mes Postulations </a>
+						<a href="#">Voir mon Cv</a>
+						<a href="#">Log Out</a>
+					</div>
+				</div> -->
+			</header>
+
+			<h1 class="job-offers-header">Liste des offres d'emploi</h1>
+			<div class="job-offers-container">
+				{% for offer in data %}
+				<div class="offer">
+					<h2 class="offer-title">{{ offer.title }}</h2>
+					<p class="offer-description">
+						<strong>Description: </strong>
+						{{ offer.description }}
+					</p>
+					<div class="offer-skills">
+						<strong>Exigences: </strong>
+						<div class="skills-container">
+							{% for skill in offer.skills %}
+							<small>{{ skill }}</small>
+							{% endfor %}
+						</div>
+					</div>
+					<button class="offer-apply-button">Postuler</button>
+				</div>
+				{% empty %}
+				<strong class="no-offers">No offers Yet.</strong>
+				{% endfor %}
+			</div>
+		</section>
+	</body>
 </html>
