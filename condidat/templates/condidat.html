@@ -4,248 +4,54 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Liste des offres d'emploi</title>
-		<style>
-			* {
-				padding: 0;
-				margin: 0;
-				box-sizing: border-box;
-			}
-			*::-webkit-scrollbar {
-				width: 10px;
-				background: #ccc;
-			}
-			*::-webkit-scrollbar-thumb {
-				background: #f4f4f4;
-				border-radius: 10px;
-			}
-
-			body {
-				font-family: Arial, sans-serif;
-				background-color: #f4f4f4;
-			}
-
-			.main {
-				width: calc(100% - 40px);
-				max-width: 2000px;
-				margin-inline: auto;
-				margin-bottom: 20px;
-
-				@media screen and (width <= 640px) {
-					width: calc(100% - 20px);
-					margin-bottom: 10px;
-				}
-
-				header {
-					display: flex;
-					align-items: center;
-					justify-content: space-between;
-
-					background: #007bff;
-					color: #fff;
-					padding: 2rem;
-
-					.search-bar {
-						display: flex;
-						align-items: center;
-						gap: 1rem;
-
-						.search-bar-input {
-							font-weight: bold;
-							padding: 10px;
-							border: none;
-							outline: none;
-							border-radius: 20px;
-							width: 250px;
-						}
-
-						.search-bar-button {
-							font-weight: bold;
-							color: #fff;
-							border: 1px solid #fff;
-							background: transparent;
-							border-radius: 20px;
-							padding: 10px 20px;
-							cursor: pointer;
-							transition: 0.3s ease;
-
-							&:hover {
-								color: #007bff;
-								border-color: currentColor;
-								background: #fff;
-							}
-						}
-					}
-				}
-
-				.job-offers-header {
-					margin-top: 2rem;
-					margin-bottom: 0.5rem;
-					color: #007bff;
-					text-decoration: underline;
-				}
-
-				.job-offers-container {
-					display: grid;
-					gap: 1rem;
-					grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-
-					.offer {
-						display: flex;
-						flex-direction: column;
-						gap: 0.75rem;
-						border: 1px solid rgba(128, 128, 128, 0.8);
-						border-radius: 0.5rem;
-						padding: 1rem;
-						font-size: 1.25rem;
-						background: #fff;
-						box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-							rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-
-						.offer-title {
-							color: #007bff;
-							font-size: 20px;
-							font-weight: bold;
-						}
-
-						.offer-description {
-							font-size: 1rem;
-						}
-
-						.offer-skills {
-							display: flex;
-							gap: 0.5rem;
-
-							strong {
-								font-size: 1rem;
-							}
-
-							.skills-container {
-								display: flex;
-								flex-wrap: wrap;
-								gap: 0.5rem;
-
-								small {
-									background: #f4f4f4;
-									border: 1px #ccc solid;
-									padding: 0.25rem 0.75rem;
-									font-size: 14px;
-									border-radius: 1rem;
-								}
-							}
-						}
-
-						.offer-apply-button {
-							background: #007bff;
-							color: #fff;
-							border: none;
-							border-radius: 5px;
-							padding: 0.5rem 1.5rem;
-							font-size: 1rem;
-							cursor: pointer;
-							transition: background 0.3s ease;
-							width: max-content;
-
-							&:hover {
-								background: #0056b3;
-							}
-						}
-					}
-				}
-			}
-
-			#home {
-				background-color: #e96cce;
-				padding-bottom: 1cm;
-				margin-left: -1cm;
-				margin-right: -1cm;
-				margin-top: -1cm;
-				padding-top: 1.3cm;
-				padding-bottom: 2cm;
-				height: 5mm;
-			}
-			.topmenu {
-				color: white;
-				margin: 10px;
-				padding: 20px;
-				font-size: 20px;
-				text-decoration: none;
-			}
-			.topmenu:hover {
-				color: white;
-				font-weight: bolder;
-				text-decoration: underline;
-				padding-top: 100px;
-				/* Add the styles here */
-			}
-
-			.topdiv {
-				float: right;
-				padding-right: 1cm;
-			}
-			.dropdown-content {
-				display: none;
-				position: absolute;
-				background-color: #007bff;
-				min-width: 160px;
-				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-				z-index: 1;
-			}
-
-			.dropdown-content a {
-				color: white;
-				padding: 12px 16px;
-				text-decoration: none;
-				display: block;
-			}
-
-			.dropdown-content a:hover {
-				background-color: #004080;
-			}
-			.recommendation:hover .dropdown-content {
-				display: block;
-			}
-
-			.user-image {
-				width: 40px; /* Vous pouvez ajuster la taille selon vos besoins */
-				height: 40px;
-
-				border-radius: 50%; /* Pour créer un cercle */
-				display: flex;
-				overflow: hidden; /* Pour cacher les parties de l'image qui dépassent du cercle */
-				margin-left: 110px; /* Pour ajouter un espacement à droite de l'image */
-			}
-		</style>
+		<script
+			src="https://kit.fontawesome.com/306bbca739.js"
+			crossorigin="anonymous"
+		></script>
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'style.css' %}" />
 	</head>
 	<body>
 		<section class="main">
 			<header>
-				<form
-					action="{% url 'search-job-offers' %}"
-					method="GET"
-					class="search-bar"
-				>
-					<input
-						class="search-bar-input"
-						type="text"
-						name="search"
-						placeholder="Recherche d'offres"
-					/>
-					<button type="submit" class="search-bar-button">Rechercher</button>
-				</form>
-				<!-- <div class="topdiv">
-					<div class="recommendation">
-						<div class="user-image">
-							<img src="" alt="Image utilisateur" width="50" height="50" />
-						</div>
+				<img
+					src="../static/assets/img/welcoming-banner.jpg"
+					alt="Welcoming Person"
+					class="header-image"
+				/>
+				<nav class="header-nav">
+					<h2 class="logo">LOGO</h2>
+					<div class="action-buttons">
+						<button class="logout">Log out</button>
+						<button class="toggle-menu">
+							<i class="fa-solid fa-bars"></i>
+						</button>
 					</div>
-					<a class="topmenu" href="#recommendation">Mon Profile </a>
-
-					<div class="dropdown-content">
-						<a href="#">Mes Postulations </a>
-						<a href="#">Voir mon Cv</a>
-						<a href="#">Log Out</a>
+					<div class="menu-content">
+						<a href="">First Link</a>
+						<a href="">Second Link</a>
+						<a href="">Third Link</a>
 					</div>
-				</div> -->
+				</nav>
+				<div class="header-content">
+					<h1>Welcome! Start your search here!</h1>
+					<form
+						action="{% url 'search-job-offers' %}"
+						method="GET"
+						class="search-bar"
+					>
+						<input
+							class="search-bar-input"
+							type="text"
+							name="search"
+							value="{{ request.GET.search }}"
+							placeholder="Recherche d'offres"
+						/>
+						<button type="submit" class="search-bar-button">
+							<i class="fa-solid fa-magnifying-glass"></i>
+						</button>
+					</form>
+				</div>
 			</header>
 
 			<h1 class="job-offers-header">Liste des offres d'emploi</h1>
@@ -272,5 +78,23 @@
 				{% endfor %}
 			</div>
 		</section>
+
+		<script>
+			const menuButton = document.body.querySelector(".toggle-menu");
+			const menuContent = document.body.querySelector(".menu-content");
+			let isMenuOpen = false;
+
+			menuButton.addEventListener("click", () => {
+				isMenuOpen = !isMenuOpen;
+
+				if (isMenuOpen) menuContent.classList.add("shown");
+				else menuContent.classList.remove("shown");
+			});
+
+			menuContent.addEventListener("mouseleave", () => {
+				menuContent.classList.remove("shown");
+				isMenuOpen = false;
+			});
+		</script>
 	</body>
 </html>
