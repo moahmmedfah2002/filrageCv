@@ -63,37 +63,177 @@
 						z-index: -1;
 					}
 
-					.search-bar {
-						background: #fff;
-						border-radius: 20px;
+					.header-nav {
+						position: fixed;
+						top: 0;
+						left: 50%;
+						transform: translateX(-50%);
 						width: 100%;
-						max-width: 500px;
+						max-width: 2000px;
+						margin-inline: auto;
+						padding: 1rem 1.5rem;
 
 						display: flex;
 						align-items: center;
+						justify-content: space-between;
 
-						.search-bar-input {
-							font-weight: bold;
-							padding-block: 10px;
-							padding-left: 10px;
-							border-radius: 20px;
-							border: none;
-							outline: none;
-							flex: 1;
+						@media screen and (width <= 640px) {
+							padding: 0.5rem;
 						}
 
-						.search-bar-button {
-							background: transparent;
-							padding: 10px;
-							border: 0;
-							outline: none;
-							cursor: pointer;
+						.logo {
+							color: #353232;
+						}
 
-							display: grid;
-							place-items: center;
+						.action-buttons {
+							display: flex;
+							align-items: center;
+							gap: 0.25rem;
 
-							i {
+							button {
+								border: 0;
+								outline: none;
+								cursor: pointer;
+
+								&.logout {
+									padding: 0.5rem 1rem;
+									font-size: 16px;
+									border-radius: 99px;
+									transition: 0.3s;
+
+									&:hover {
+										background: rgb(233, 66, 66);
+										color: #fff;
+									}
+								}
+
+								&.toggle-menu {
+									width: 34px;
+									height: 34px;
+
+									display: grid;
+									place-items: center;
+									background: #f4f4f4;
+									border: 1px solid #ccc;
+									border-radius: 50%;
+									padding: 0.5rem;
+									transition: 0.3s;
+
+									&:hover {
+										border-color: #353232;
+									}
+
+									i {
+										font-size: 18px;
+									}
+								}
+							}
+						}
+
+						.menu-content {
+							position: absolute;
+							right: 1.5rem;
+							background: #f4f4f4;
+							border-radius: 0.25rem;
+							overflow: hidden;
+							z-index: 99;
+							transition: all 0.3s ease-in;
+
+							top: 3rem;
+							opacity: 0;
+							visibility: hidden;
+
+							display: flex;
+							flex-direction: column;
+
+							&.shown {
+								top: 3.5rem;
+								opacity: 1;
+								visibility: visible;
+							}
+
+							@media screen and (width <= 640px) {
+								right: 0.5rem;
+								top: 2.5rem;
+
+								&.shown {
+									top: 3rem;
+								}
+							}
+
+							a {
+								text-decoration: none;
+								color: #353232;
+								background: #f4f4f4;
 								font-size: 1rem;
+								padding: 0.25rem 0.5rem;
+								transition: all 0.3s;
+
+								&:hover {
+									color: #f4f4f4;
+									background: #353232;
+								}
+							}
+						}
+					}
+
+					.header-content {
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						gap: 1rem;
+
+						h1 {
+							color: #353232;
+							text-align: center;
+						}
+
+						.search-bar {
+							background: #fff;
+							border: 2px solid #fff;
+							border-radius: 20px;
+							width: 100%;
+							max-width: 500px;
+							transition: 0.3s;
+
+							display: flex;
+							align-items: center;
+
+							&:has(input:focus) {
+								border-color: #007bff;
+							}
+
+							.search-bar-input {
+								font-weight: bold;
+								padding-block: 10px;
+								padding-left: 10px;
+								border-radius: 20px;
+								border: none;
+								outline: none;
+								flex: 1;
+							}
+
+							.search-bar-button {
+								background: transparent;
+								padding: 10px;
+								border: 0;
+								outline: none;
+								cursor: pointer;
+
+								display: grid;
+								place-items: center;
+
+								i {
+									font-size: 1rem;
+									transition: 0.3s;
+								}
+
+								&:hover {
+									i {
+										color: #007bff;
+									}
+								}
 							}
 						}
 					}
@@ -201,22 +341,39 @@
 					alt="Welcoming Person"
 					class="header-image"
 				/>
-				<form
-					action="{% url 'search-job-offers' %}"
-					method="GET"
-					class="search-bar"
-				>
-					<input
-						class="search-bar-input"
-						type="text"
-						name="search"
-						value="{{ request.GET.search }}"
-						placeholder="Recherche d'offres"
-					/>
-					<button type="submit" class="search-bar-button">
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</button>
-				</form>
+				<nav class="header-nav">
+					<h2 class="logo">LOGO</h2>
+					<div class="action-buttons">
+						<button class="logout">Log out</button>
+						<button class="toggle-menu">
+							<i class="fa-solid fa-bars"></i>
+						</button>
+					</div>
+					<div class="menu-content">
+						<a href="">First Link</a>
+						<a href="">Second Link</a>
+						<a href="">Third Link</a>
+					</div>
+				</nav>
+				<div class="header-content">
+					<h1>Welcome! Start your search here!</h1>
+					<form
+						action="{% url 'search-job-offers' %}"
+						method="GET"
+						class="search-bar"
+					>
+						<input
+							class="search-bar-input"
+							type="text"
+							name="search"
+							value="{{ request.GET.search }}"
+							placeholder="Recherche d'offres"
+						/>
+						<button type="submit" class="search-bar-button">
+							<i class="fa-solid fa-magnifying-glass"></i>
+						</button>
+					</form>
+				</div>
 			</header>
 
 			<h1 class="job-offers-header">Liste des offres d'emploi</h1>
@@ -243,5 +400,23 @@
 				{% endfor %}
 			</div>
 		</section>
+
+		<script>
+			const menuButton = document.body.querySelector(".toggle-menu");
+			const menuContent = document.body.querySelector(".menu-content");
+			let isMenuOpen = false;
+
+			menuButton.addEventListener("click", () => {
+				isMenuOpen = !isMenuOpen;
+
+				if (isMenuOpen) menuContent.classList.add("shown");
+				else menuContent.classList.remove("shown");
+			});
+
+			menuContent.addEventListener("mouseleave", () => {
+				menuContent.classList.remove("shown");
+				isMenuOpen = false;
+			});
+		</script>
 	</body>
 </html>
