@@ -35,30 +35,44 @@
 					margin-bottom: 10px;
 				}
 
-				.search-bar {
-					background-color: #007bff;
+				header {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+
+					background: #007bff;
 					color: #fff;
 					padding: 2rem;
 
-					&__input {
-						padding: 10px;
-						border: none;
-						border-radius: 20px;
-						width: 250px;
-						margin-right: 35px;
-					}
+					.search-bar {
+						display: flex;
+						align-items: center;
+						gap: 1rem;
 
-					&__button {
-						background-color: #0056b3;
-						color: #fff;
-						border: none;
-						border-radius: 100px;
-						padding: 10px 20px;
-						cursor: pointer;
-						transition: background-color 0.3s ease;
+						.search-bar-input {
+							font-weight: bold;
+							padding: 10px;
+							border: none;
+							outline: none;
+							border-radius: 20px;
+							width: 250px;
+						}
 
-						&:hover {
-							background-color: #004080;
+						.search-bar-button {
+							font-weight: bold;
+							color: #fff;
+							border: 1px solid #fff;
+							background: transparent;
+							border-radius: 20px;
+							padding: 10px 20px;
+							cursor: pointer;
+							transition: 0.3s ease;
+
+							&:hover {
+								color: #007bff;
+								border-color: currentColor;
+								background: #fff;
+							}
 						}
 					}
 				}
@@ -204,13 +218,20 @@
 	</head>
 	<body>
 		<section class="main">
-			<div class="search-bar">
-				<input
-					class="search-bar__input"
-					type="text"
-					placeholder="Recherche d'offres"
-				/>
-				<button class="search-bar__button">Rechercher</button>
+			<header>
+				<form
+					action="{% url 'search-job-offers' %}"
+					method="GET"
+					class="search-bar"
+				>
+					<input
+						class="search-bar-input"
+						type="text"
+						name="search"
+						placeholder="Recherche d'offres"
+					/>
+					<button type="submit" class="search-bar-button">Rechercher</button>
+				</form>
 				<!-- <div class="topdiv">
 					<div class="recommendation">
 						<div class="user-image">
@@ -225,7 +246,7 @@
 						<a href="#">Log Out</a>
 					</div>
 				</div> -->
-			</div>
+			</header>
 
 			<h1 class="job-offers-header">Liste des offres d'emploi</h1>
 			<div class="job-offers-container">
@@ -246,6 +267,8 @@
 					</div>
 					<button class="offer-apply-button">Postuler</button>
 				</div>
+				{% empty %}
+				<strong class="no-offers">No offers Yet.</strong>
 				{% endfor %}
 			</div>
 		</section>
