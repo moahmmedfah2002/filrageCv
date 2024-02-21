@@ -1,7 +1,8 @@
 
 from django.shortcuts import render
+import sqlite3 as sql
 
-from .models import UploadFileForm
+#from .models import UploadFileForm
 def index(request):
         return render(request,"condidat.html")
 
@@ -13,10 +14,15 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 def upload_file(request):
     if request.method == "POST":
-        form = UploadFileForm(request.POST, request.FILES)
+        #form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             handle_uploaded_file(request.FILES["file"])
             return render(request,"condidat.html")
-    else:
-        form = UploadFileForm()
+    #else:
+        #form = UploadFileForm()
     return render(request, "upload.html")
+
+def upload(request):
+     
+     return render(request,"upload.html")
+
