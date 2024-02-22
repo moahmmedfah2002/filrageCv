@@ -4,13 +4,97 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Détails d'offre</title>
+<<<<<<< HEAD
+=======
+		<link rel="stylesheet" href="offer-details.css">
+>>>>>>> a3b675bc966209aa22aeae17a2260729363587fd
 		<script
 			src="https://kit.fontawesome.com/306bbca739.js"
 			crossorigin="anonymous"
 		></script>
 	</head>
 	<body>
+<<<<<<< HEAD
 		<h1>{{ offer.title }}</h1>
 		<p>{{ offer.description }}</p>
+=======
+		<!--<h1>{{ offer.title }}</h1>
+		<p>{{ offer.description }}</p>-->
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails d'offre</title>
+    <link rel="stylesheet" href="offersdetails.css">
+    <script src="https://kit.fontawesome.com/306bbca739.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ offer.title }}</h1>
+            <div class="meta">
+                <p><i class="far fa-calendar-alt"></i> Date de publication : {{ offer.date }}</p>
+                <p><i class="fas fa-map-marker-alt"></i> Lieu : {{ offer.location }}</p>
+                <p><i class="fas fa-clock"></i> Durée : {{ offer.duration }}</p>
+            </div>
+        </header>
+        <hr>
+        <section class="description">
+            <h2>Description de l'offre :</h2>
+            <p>{{ offer.description }}</p>
+        </section>
+        <section class="requirements">
+            <h2>Exigences :</h2>
+            <ul>
+                <li>Diplôme universitaire en informatique, génie logiciel ou dans un domaine connexe.</li>
+                <li>Expérience avérée dans le développement web, de préférence avec des langages tels que HTML, CSS, JavaScript, et des frameworks comme React, Angular ou Vue.js.</li>
+                <li>Connaissance des langages de programmation back-end tels que Python, Ruby, Node.js, ou PHP.</li>
+                <li>Expérience avec les bases de données relationnelles et non relationnelles.</li>
+                <li>Fortes compétences en résolution de problèmes et capacité à travailler de manière autonome.</li>
+                <li>Capacité à collaborer efficacement avec une équipe multidisciplinaire.</li>
+                <li>Excellentes compétences en communication écrite et verbale.</li>
+            </ul>
+        </section>
+        <section class="benefits">
+            <h2>Avantages :</h2>
+            <ul>
+                <li>Environnement de travail stimulant et collaboratif.</li>
+                <li>Possibilités d'apprentissage et de développement professionnel.</li>
+                <li>Salaire compétitif et avantages sociaux attrayants.</li>
+                <li>Flexibilité horaire et possibilité de télétravail.</li>
+            </ul>
+        </section>
+    </div>
+	<p>Les candidats intéressés sont invités à telecharger  leur CV  , afin d'etre filtrer </p>
+	<form method="post" enctype="multipart/form-data">
+		<div>
+		  <label for="file">Sélectionner le fichier à envoyer</label>
+		  <input type="file" id="file" name="file" multiple accept=".pdf" />
+		</div>
+		<div>
+		  <button>Filtrer</button>
+		</div>
+	  </form>
+	  
+
+	<footer>
+		<h3>Contact us </h3>
+		<div class="footer-content">
+			<div class="social-links">
+				<a href="https://www.instagram.com/csec.ensa.m?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+				<a href="https://www.facebook.com/ClubInfoEnsa" target="_blank"><i class="fab fa-facebook"></i></a>
+				<a href="https://www.linkedin.com/votre_compte_linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+			</div>
+		
+	
+			<div class="copyright">
+				&copy; 2024 Mon Site Web. Tous droits réservés.
+			</div>
+		 
+		</div>
+	</footer>
+
+>>>>>>> a3b675bc966209aa22aeae17a2260729363587fd
 	</body>
 </html>

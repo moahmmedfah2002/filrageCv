@@ -350,6 +350,10 @@ footer {
     font-size: 24px; /* Taille des icônes */
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a3b675bc966209aa22aeae17a2260729363587fd
 /* Style de la section de publication */
 .publication {
     display: flex; /* Utiliser Flexbox pour aligner les éléments */
@@ -365,4 +369,8 @@ footer {
 .publication p {
     font-size: 14px; /* Taille du texte */
     margin: 0; /* Supprimer les marges autour du paragraphe */
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a3b675bc966209aa22aeae17a2260729363587fd
