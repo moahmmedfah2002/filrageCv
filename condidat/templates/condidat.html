@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Liste des offres d'emploi</title>
+		<title> offres d'emploi</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 		<script
 			src="https://kit.fontawesome.com/306bbca739.js"
 			crossorigin="anonymous"
@@ -15,26 +16,27 @@
 		<section class="main">
 			<header>
 				<img
-					src="../static/assets/img/welcoming-banner.jpg"
-					alt="Welcoming Person"
+					src="..\static\assets\img\acceuil.jpg"alt="Welcoming Person"
 					class="header-image"
 				/>
 				<nav class="header-nav">
-					<h2 class="logo">LOGO</h2>
+					<h1></h1>
 					<div class="action-buttons">
-						<button class="logout">Log out</button>
+						
 						<button class="toggle-menu">
 							<i class="fa-solid fa-bars"></i>
 						</button>
 					</div>
 					<div class="menu-content">
-						<a href="">First Link</a>
-						<a href="">Second Link</a>
-						<a href="">Third Link</a>
+						<a href="">Mon profil</a>
+						<a href="">Mon Cv</a>
+						<a href="">Log out</a>
+						
 					</div>
 				</nav>
 				<div class="header-content">
-					<h1>Welcome! Start your search here!</h1>
+					<h1>Bienvenue sur notre site web!</h1>
+                    <h4>Explorez des opportunités de carrière passionnantes avec nous !</h4>
 					<form
 						action="{% url 'search-job-offers' %}"
 						method="GET"
@@ -45,7 +47,7 @@
 							type="text"
 							name="search"
 							value="{{ request.GET.search }}"
-							placeholder="Recherche d'offres"
+							placeholder="Recherche offres"
 						/>
 						<button type="submit" class="search-bar-button">
 							<i class="fa-solid fa-magnifying-glass"></i>
@@ -97,4 +99,26 @@
 			});
 		</script>
 	</body>
+    <footer>
+        <h3>Contact us </h3>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.instagram.com/csec.ensa.m?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/ClubInfoEnsa" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/votre_compte_linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="publication">
+                <img src="..\static\assets\img\logo.jpg" alt="Votre logo">
+          <p> Computer Science Engeneering club<br>
+            Ensa-Marrakech</p><br></div>
+            <div class="publication">
+          <img src="..\static\assets\img\logoENSA.png" alt="Ensalogo">
+            </div>
+            <div class="copyright">
+                &copy; 2024 Mon Site Web. Tous droits réservés.
+            </div>
+         
+        </div>
+    </footer>
+
 </html>

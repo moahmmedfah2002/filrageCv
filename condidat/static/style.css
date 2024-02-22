@@ -72,10 +72,6 @@ body {
                 padding: 0.5rem;
             }
 
-            .logo {
-                color: #353232;
-            }
-
             .action-buttons {
                 display: flex;
                 align-items: center;
@@ -178,6 +174,11 @@ body {
             h1 {
                 color: #353232;
                 text-align: center;
+            }
+            h4{
+                color: #353232;
+                text-align: center;
+
             }
 
             .search-bar {
@@ -321,4 +322,46 @@ body {
             }
         }
     }
+}
+body, footer {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style du pied de page */
+footer {
+    background-color: #333; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    padding: 20px; /* Espacement intérieur */
+}
+
+/* Style de la section de contenu du pied de page */
+.footer-content {
+    display: flex; /* Utiliser Flexbox pour aligner les éléments */
+    justify-content: space-between; /* Espacement égal entre les éléments */
+    align-items: center; /* Aligner les éléments au centre verticalement */
+}
+
+/* Style des liens de médias sociaux */
+.social-links a {
+    margin-right: 30px; /* Espacement entre les icônes */
+    color: #fff; /* Couleur du texte des icônes */
+    font-size: 24px; /* Taille des icônes */
+}
+
+/* Style de la section de publication */
+.publication {
+    display: flex; /* Utiliser Flexbox pour aligner les éléments */
+    align-items: center; /* Aligner les éléments au centre verticalement */
+}
+
+.publication img {
+    width: 50px; /* Ajuster la largeur de l'image selon vos besoins */
+    height: auto; /* Ajuster automatiquement la hauteur pour conserver les proportions */
+    margin-right: 10px; /* Espacement entre le logo et le texte */
+}
+
+.publication p {
+    font-size: 14px; /* Taille du texte */
+    margin: 0; /* Supprimer les marges autour du paragraphe */
 }
