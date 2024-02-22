@@ -315,6 +315,7 @@ body {
                 transition: background 0.3s ease;
                 width: max-content;
                 margin-top: auto;
+                text-decoration: none;
 
                 &:hover {
                     background: #0056b3;

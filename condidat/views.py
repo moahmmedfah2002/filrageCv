@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 import sqlite3 as sql
 
 dummy_data = [
@@ -67,16 +68,15 @@ dummy_data = [
 
 # from .models import UploadFileForm
 def index(request):
-
     return render(request, "condidat.html", {"data": dummy_data})
 
 
 def search_job_offers(request):
     search_query = request.GET.get("search")
-    search_query = search_query.lower()
 
     filtered_jobs = []
     if search_query:
+        search_query = search_query.lower()
         filtered_jobs = [
             offer
             for offer in dummy_data
@@ -88,6 +88,19 @@ def search_job_offers(request):
         filtered_jobs = dummy_data
 
     return render(request, "condidat.html", {"data": filtered_jobs})
+
+
+def offer_details(request, slug):
+    selected_offer = None
+    for offer in dummy_data:
+        if offer["title"].lower().replace(" ", "-") == slug:
+            selected_offer = offer
+            break
+
+    if selected_offer is not None:
+        return render(request, "offer-details.html", {"offer": selected_offer})
+
+    return HttpResponse("404\nOffer Not Found")
 
 
 """
