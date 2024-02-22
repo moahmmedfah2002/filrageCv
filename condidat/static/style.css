@@ -350,19 +350,3 @@ footer {
     font-size: 24px; /* Taille des icônes */
 }
 
-/* Style de la section de publication */
-.publication {
-    display: flex; /* Utiliser Flexbox pour aligner les éléments */
-    align-items: center; /* Aligner les éléments au centre verticalement */
-}
-
-.publication img {
-    width: 50px; /* Ajuster la largeur de l'image selon vos besoins */
-    height: auto; /* Ajuster automatiquement la hauteur pour conserver les proportions */
-    margin-right: 10px; /* Espacement entre le logo et le texte */
-}
-
-.publication p {
-    font-size: 14px; /* Taille du texte */
-    margin: 0; /* Supprimer les marges autour du paragraphe */
-}
