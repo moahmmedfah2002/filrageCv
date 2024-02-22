@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from autoslug import AutoSlugField
 from django_countries.fields import CountryField
-from recruiters.models import Job
-from django.utils import timezone
+
+
+
 
 CHOICES = (
     ('Full Time', 'Full Time'),
@@ -43,22 +44,9 @@ class Skill(models.Model):
 
 
 class SavedJobs(models.Model):
-    job = models.ForeignKey(
-        Job, related_name='saved_job', on_delete=models.CASCADE)
-    user = models.ForeignKey(
-        User, related_name='saved', on_delete=models.CASCADE)
-    date_posted = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return self.job.title
+    idoffre=models.IntegerField()
+    idcandidat =models.IntegerField()
+    
 
 
-class AppliedJobs(models.Model):
-    job = models.ForeignKey(
-        Job, related_name='applied_job', on_delete=models.CASCADE)
-    user = models.ForeignKey(
-        User, related_name='applied_user', on_delete=models.CASCADE)
-    date_posted = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return self.job.title
