@@ -46,6 +46,7 @@ class Skill(models.Model):
 class SavedJobs(models.Model):
     idoffre=models.IntegerField()
     idcandidat =models.IntegerField() 
+    
 
    
 
