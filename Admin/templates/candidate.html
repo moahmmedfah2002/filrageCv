@@ -4,30 +4,31 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Téléphone</th>
+        <th scope="col">DELETE</th>
       </tr>
     </thead>
     <tbody>
+      {% for condidat in condidats  %}
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        
+        <td>{{condidat.1}}</td>
+        <td>{{condidat.2}}</td>
+        <td>{{condidat.3}}</td>
+        <td>{{condidat.4}}</td>
+        <td>
+        <form method="post" action=""> 
+          <input type="hidden" name="id" value="{{condidat.0}}">
+          <button type="submit" class="btn btn-danger">DELETE</button>
+        </form>
+      </td>
+        
+        
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
+     {%endfor%}
     </tbody>
   </table>
      
