@@ -92,3 +92,18 @@ ul{
 .condidat{
     margin-top: 10%;
 }
+th a{
+    border: solid red 5px;
+    font-weight: bold;
+    color: red;
+    font-size: 30px;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+th button{
+    background: green;
+    color:white;
+    border-radius: 10px;
+    border:hidden;
+    padding: 10px;
+}

@@ -1,0 +1,36 @@
+{% extends 'admin.html'%}
+{% block content %}
+<<<<<<< HEAD
+
+    
+<h1>
+    candidate list
+</h1>
+<table>
+  <thead>
+    <th>nom</th>
+    <th>prenom</th>
+    <th>email</th>
+    <th>phone number</th>
+    <th>entreprise</th>
+    <th>num_patent</th>
+    <th>clef_recruteur</th>
+    <th colspan = 2>action</th>
+  </thead>
+  {% for recruteur in recruteurs %}
+      <tr>
+        <th>{{recruteur.nom}}</th>
+        <th>{{recruteur.prenom}}</th>
+        <th>{{recruteur.email}}</th>
+        <th>{{recruteur.phone}}</th>
+        <th>{{recruteur.entreprise}}</th>
+        <th>{{recruteur.num_patent}}</th>
+        <th>{{recruteur.clef_recruteur}}</th>
+        <th><button>inspect</button></th>
+        <th>
+          <a href="{% url 'delete_recruteur' recruteur.id_recruteur %}"> - </a>
+        </th>
+      </tr>
+  {%endfor%}
+</table>
+{%endblock%}

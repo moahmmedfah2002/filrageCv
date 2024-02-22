@@ -1,18 +1,82 @@
 {% extends 'admin.html'%}
 {% block content %}
-<nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none   navbar-transparent nav-bar ">
-  <div class="container nav-container">
-    <a class="navbar-brand  text-white " href="" rel="tooltip" >
-     <h3 class="text-white">Home</h3>
-    </a>
-   
-     <a class="navbar-brand  text-white " href="" rel="tooltip" >
-      <h3 class="text-white"> Profile</h3>
-     </a>
-   
+<<<<<<< HEAD
+<div class="bar">
+  <div>
+      <a class="navbar-brand  text-white " href="" rel="tooltip" >
+       <h3 class="home">Home</h3>
+      </a>
+  
+       <a class="navbar-brand  text-white " href="" rel="tooltip" >
+        <h3 class="profile"> Profile</h3>
+       </a>
+      
     </div>
-</nav>
- <h1>
-  candidate list
- </h1>
+
+</div>
+    
+<h1>
+    candidate list
+</h1>
+<table>
+  <thead>
+    <th>nom</th>
+    <th>prenom</th>
+    <th>email</th>
+    <th>phone number</th>
+    <th>entreprise</th>
+    <th>num_patent</th>
+    <th colspan = 2>action</th>
+  </thead>
+  {% for candidat in candidats%}
+      <tr>
+        <th>{{candidat.nom}}</th>
+        <th>{{candidat.prenom}}</th>
+        <th>{{candidat.email}}</th>
+        <th>{{candidat.phone}}</th>
+        <th>{{candidat.entreprise}}</th>
+        <th>{{candidat.num_patent}}</th>
+        <th><button>inspect</button></th>
+        <th><button>-</button></th>
+      </tr>
+  {%endfor%}
+</table>
+ 
+
 {%endblock%}
+=======
+<section class="container text-center condidat" id="dash">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Téléphone</th>
+        <th scope="col">DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for condidat in condidats  %}
+      <tr>
+        
+        <td>{{condidat.1}}</td>
+        <td>{{condidat.2}}</td>
+        <td>{{condidat.3}}</td>
+        <td>{{condidat.4}}</td>
+        <td>
+        <form method="post" action=""> 
+          <input type="hidden" name="id" value="{{condidat.0}}">
+          <button type="submit" class="btn btn-danger">DELETE</button>
+        </form>
+      </td>
+        
+        
+      </tr>
+     {%endfor%}
+    </tbody>
+  </table>
+     
+</section>
+{%endblock%} 
+>>>>>>> 8e15c55f789a8156dc161847a1a8806163b82793
