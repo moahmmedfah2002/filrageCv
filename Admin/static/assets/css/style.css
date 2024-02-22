@@ -16,7 +16,7 @@
 .stat{
     width:20%;
     height: 200px;
-    background-image: linear-gradient(195deg, #42424a94 0%, #737272 100%);
+    background-image: linear-gradient(195deg, #161617d6 0%, #110e0e 100%);
     border: none;
     border-radius: 10px;
     margin: 2%;
@@ -31,15 +31,18 @@
     margin-top: 5%;
 }
 .nav-bar{
-    background-color: blue ;
+    background-image: linear-gradient(195deg, #1b1b676e 0%, #c1d7e9b1 100%) ;
     border:none;
-    border-bottom: 50px;
+    
     
 }
 .nav-container{
     margin-top: 1%;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
 }
 .card{
     justify-content: center;
+}
+.condidat{
+    margin-top: 10%;
 }
