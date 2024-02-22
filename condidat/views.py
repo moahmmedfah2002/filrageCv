@@ -64,7 +64,7 @@ def job_search_list(request):
         'jobs': page_obj,
         'query': query,
     }
-    return render(request, 'condidat/main.html', context)
+    return render(request, 'condidat.html', context)
 
 def job_detail(request, slug):
     job = get_object_or_404(Job, slug=slug)
