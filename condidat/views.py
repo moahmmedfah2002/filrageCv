@@ -1,132 +1,202 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import sqlite3 as sql
-
-dummy_data = [
-    {
-        "title": "Full Stack Web Developer",
-        "description": "We are seeking a talented Full Stack Web Developer to join our team. The ideal candidate will have experience with both front-end and back-end development technologies.",
-        "skills": [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "React",
-            "Node.js",
-            "Express",
-            "MongoDB",
-        ],
-    },
-    {
-        "title": "Electronics Engineer",
-        "description": "We are looking for an Electronics Engineer to design and develop electronic circuits and systems. The candidate should have strong skills in analog and digital circuit design.",
-        "skills": [
-            "Analog Circuit Design",
-            "Digital Circuit Design",
-            "PCB Layout",
-            "Microcontrollers",
-            "Embedded Systems",
-        ],
-    },
-    {
-        "title": "Front-End Developer",
-        "description": "We have an opening for a Front-End Developer to work on creating beautiful and responsive user interfaces. The ideal candidate should have a strong understanding of front-end technologies and frameworks.",
-        "skills": ["HTML", "CSS", "JavaScript", "React", "Vue.js", "Angular"],
-    },
-    {
-        "title": "Embedded Software Engineer",
-        "description": "We are seeking an Embedded Software Engineer to develop firmware and software for embedded systems. The candidate should have experience with programming microcontrollers and debugging embedded software.",
-        "skills": ["C/C++", "Embedded C", "RTOS", "ARM Cortex-M", "SPI", "I2C"],
-    },
-    {
-        "title": "Back-End Developer",
-        "description": "We are looking for a Back-End Developer to work on server-side logic and database management. The ideal candidate should have experience with backend technologies and frameworks.",
-        "skills": ["Python", "Django", "Flask", "Node.js", "Express", "SQL"],
-    },
-    {
-        "title": "UI/UX Designer",
-        "description": "We have an opening for a UI/UX Designer to create intuitive and visually appealing user interfaces. The candidate should have a strong portfolio showcasing design skills.",
-        "skills": ["UI Design", "UX Design", "Adobe XD", "Sketch", "Figma"],
-    },
-    {
-        "title": "Hardware Engineer",
-        "description": "We are seeking a Hardware Engineer to design and develop electronic hardware components. The candidate should have experience with schematic capture and PCB design tools.",
-        "skills": [
-            "Schematic Capture",
-            "PCB Design",
-            "Altium Designer",
-            "KiCad",
-            "Signal Integrity",
-        ],
-    },
-    {
-        "title": "Firmware Engineer",
-        "description": "We are looking for a Firmware Engineer to develop low-level software for embedded systems. The candidate should have experience with firmware development and debugging.",
-        "skills": ["C", "Assembly", "Embedded Systems", "RTOS", "Device Drivers"],
-    },
-]
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Profile, Skill
+from .forms import ProfileUpdateForm, NewSkillForm
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.views.generic import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import get_user_model
+from django.core.paginator import Paginator
 
 
-# from .models import UploadFileForm
-def index(request):
-    return render(request, "condidat.html", {"data": dummy_data})
+def home(request):
+    context = {
+        'home_page': "active",
+    }
+    return render(request, 'condidat.html', context)
 
-
-def search_job_offers(request):
-    search_query = request.GET.get("search")
-
-    filtered_jobs = []
-    if search_query:
-        search_query = search_query.lower()
-        filtered_jobs = [
-            offer
-            for offer in dummy_data
-            if search_query in offer["title"].lower()
-            or search_query in offer["description"].lower()
-            or any(search_query in skill.lower() for skill in offer["skills"])
-        ]
+def job_search_list(request):
+    query = request.GET.get('p')
+    loc = request.GET.get('q')
+    object_list = []
+    if(query == None):
+        object_list = Job.objects.all()
     else:
-        filtered_jobs = dummy_data
+        title_list = Job.objects.filter(
+            title__icontains=query).order_by('-date_posted')
+        skill_list = Job.objects.filter(
+            skills_req__icontains=query).order_by('-date_posted')
+        company_list = Job.objects.filter(
+            company__icontains=query).order_by('-date_posted')
+        job_type_list = Job.objects.filter(
+            job_type__icontains=query).order_by('-date_posted')
+        for i in title_list:
+            object_list.append(i)
+        for i in skill_list:
+            if i not in object_list:
+                object_list.append(i)
+        for i in company_list:
+            if i not in object_list:
+                object_list.append(i)
+        for i in job_type_list:
+            if i not in object_list:
+                object_list.append(i)
+    if(loc == None):
+        locat = Job.objects.all()
+    else:
+        locat = Job.objects.filter(
+            location__icontains=loc).order_by('-date_posted')
+    final_list = []
+    for i in object_list:
+        if i in locat:
+            final_list.append(i)
+    paginator = Paginator(final_list, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'jobs': page_obj,
+        'query': query,
+    }
+    return render(request, 'condidat/main.html', context)
 
-    return render(request, "condidat.html", {"data": filtered_jobs})
-
-
-def offer_details(request, slug):
-    selected_offer = None
-    for offer in dummy_data:
-        if offer["title"].lower().replace(" ", "-") == slug:
-            selected_offer = offer
+def job_detail(request, slug):
+    job = get_object_or_404(Job, slug=slug)
+    apply_button = 0
+    save_button = 0
+    profile = Profile.objects.filter(user=request.user).first()
+    if AppliedJobs.objects.filter(user=request.user).filter(job=job).exists():
+        apply_button = 1
+    if SavedJobs.objects.filter(user=request.user).filter(job=job).exists():
+        save_button = 1
+    relevant_jobs = []
+    jobs1 = Job.objects.filter(
+        company__icontains=job.company).order_by('-date_posted')
+    jobs2 = Job.objects.filter(
+        job_type__icontains=job.job_type).order_by('-date_posted')
+    jobs3 = Job.objects.filter(
+        title__icontains=job.title).order_by('-date_posted')
+    for i in jobs1:
+        if len(relevant_jobs) > 5:
             break
+        if i not in relevant_jobs and i != job:
+            relevant_jobs.append(i)
+    for i in jobs2:
+        if len(relevant_jobs) > 5:
+            break
+        if i not in relevant_jobs and i != job:
+            relevant_jobs.append(i)
+    for i in jobs3:
+        if len(relevant_jobs) > 5:
+            break
+        if i not in relevant_jobs and i != job:
+            relevant_jobs.append(i)
 
-    if selected_offer is not None:
-        return render(request, "offer-details.html", {"offer": selected_offer})
+    return render(request, 'offer-details.html', {'job': job, 'profile': profile, 'apply_button': apply_button, 'save_button': save_button, 'relevant_jobs': relevant_jobs, 'candidate_navbar': 1})
 
-    return HttpResponse("404\nOffer Not Found")
-
-
-"""
-def handle_uploaded_file(f):
-    with open("some/file/name.txt", "wb+") as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
-"""
-
-
-def upload_file(request):
-    if request.method == "POST":
-        print("POST method")
-        """"
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            handle_uploaded_file(request.FILES["file"])
-            return render(request, "condidat.html")
-        """
+@login_required
+def intelligent_search(request):
+    relevant_jobs = []
+    common = []
+    job_skills = []
+    user = request.user
+    profile = Profile.objects.filter(user=user).first()
+    my_skill_query = Skill.objects.filter(user=user)
+    my_skills = []
+    for i in my_skill_query:
+        my_skills.append(i.skill.lower())
+    if profile:
+        jobs = Job.objects.filter(
+            job_type=profile.looking_for).order_by('-date_posted')
     else:
-        # form = UploadFileForm()
-        print("Not POST method")
+        jobs = Job.objects.all()
+    for job in jobs:
+        skills = []
+        sk = str(job.skills_req).split(",")
+        for i in sk:
+            skills.append(i.strip().lower())
+        common_skills = list(set(my_skills) & set(skills))
+        if (len(common_skills) != 0 and len(common_skills) >= len(skills)//2):
+            relevant_jobs.append(job)
+            common.append(len(common_skills))
+            job_skills.append(len(skills))
+    objects = zip(relevant_jobs, common, job_skills)
+    objects = sorted(objects, key=lambda t: t[1]/t[2], reverse=True)
+    objects = objects[:100]
+    context = {
+        'intel_page': "active",
+        'jobs': objects,
+        'counter': len(relevant_jobs),
+    }
+    return render(request, 'condidat.html', context)
 
-    return render(request, "upload.html")
+@login_required
+def my_profile(request):
+    you = request.user
+    profile = Profile.objects.filter(user=you).first()
+    user_skills = Skill.objects.filter(user=you)
+    if request.method == 'POST':
+        form = NewSkillForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = you
+            data.save()
+            return redirect('my-profile')
+    else:
+        form = NewSkillForm()
+    context = {
+        'u': you,
+        'profile': profile,
+        'skills': user_skills,
+        'form': form,
+        'profile_page': "active",
+    }
+    return render(request, 'condidat.html', context)
 
+@login_required
+def edit_profile(request):
+    you = request.user
+    profile = Profile.objects.filter(user=you).first()
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = you
+            data.save()
+            return redirect('my-profile')
+    else:
+        form = ProfileUpdateForm(instance=profile)
+    context = {
+        'form': form,
+    }
+    return render(request, 'condidat.html', context)
 
-def upload(request):
+@login_required
+def profile_view(request, slug):
+    p = Profile.objects.filter(slug=slug).first()
+    you = p.user
+    user_skills = Skill.objects.filter(user=you)
+    context = {
+        'u': you,
+        'profile': p,
+        'skills': user_skills,
+    }
+    return render(request, 'condidat.html', context)
 
-    return render(request, "upload.html")
+def candidate_details(request):
+    return render(request, 'condidat.html')
+
+@login_required
+@csrf_exempt
+def delete_skill(request, pk=None):
+    if request.method == 'POST':
+        id_list = request.POST.getlist('choices')
+        for skill_id in id_list:
+            Skill.objects.get(id=skill_id).delete()
+        return redirect('my-profile')
