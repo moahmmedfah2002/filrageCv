@@ -1,45 +1,18 @@
 {% extends 'admin.html'%}
 {% block content %}
-<div class="bar">
-  <div>
-      <a class="navbar-brand  text-white " href="" rel="tooltip" >
-       <h3 class="home">Home</h3>
-      </a>
-  
-       <a class="navbar-brand  text-white " href="" rel="tooltip" >
-        <h3 class="profile"> Profile</h3>
-       </a>
-      
+<nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none   navbar-transparent nav-bar ">
+  <div class="container nav-container">
+    <a class="navbar-brand  text-white " href="" rel="tooltip" >
+     <h3 class="text-white">Home</h3>
+    </a>
+   
+     <a class="navbar-brand  text-white " href="" rel="tooltip" >
+      <h3 class="text-white"> Profile</h3>
+     </a>
+   
     </div>
-
-</div>
-    
-<h1>
-    candidate list
-</h1>
-<table>
-  <thead>
-    <th>nom</th>
-    <th>prenom</th>
-    <th>email</th>
-    <th>phone number</th>
-    <th>entreprise</th>
-    <th>num_patent</th>
-    <th colspan = 2>action</th>
-  </thead>
-  {% for candidat in candidats%}
-      <tr>
-        <th>{{candidat.nom}}</th>
-        <th>{{candidat.prenom}}</th>
-        <th>{{candidat.email}}</th>
-        <th>{{candidat.phone}}</th>
-        <th>{{candidat.entreprise}}</th>
-        <th>{{candidat.num_patent}}</th>
-        <th><button>inspect</button></th>
-        <th><button>-</button></th>
-      </tr>
-  {%endfor%}
-</table>
- 
-
+</nav>
+ <h1>
+  candidate list
+ </h1>
 {%endblock%}

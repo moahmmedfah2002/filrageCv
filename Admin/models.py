@@ -6,7 +6,6 @@ class condidat(models.Model):
     prenom=models.TextField(max_length=255)
     email=models.TextField(max_length=255)
     phone=models.TextField(max_length=255)
-    login=models.TextField(max_length=255)
     password=models.TextField(max_length=255)
     entreprise=models.TextField(max_length=255)
     num_patent=models.IntegerField()
