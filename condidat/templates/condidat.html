@@ -3,8 +3,11 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title> offres d'emploi</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+		<title>offres d'emploi</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		/>
 		<script
 			src="https://kit.fontawesome.com/306bbca739.js"
 			crossorigin="anonymous"
@@ -342,34 +345,33 @@
 				color: #fff; /* Couleur du texte */
 				padding: 20px; /* Espacement intérieur */
 			}
-			
+
 			/* Style de la section de contenu du pied de page */
 			.footer-content {
 				display: flex; /* Utiliser Flexbox pour aligner les éléments */
 				justify-content: space-between; /* Espacement égal entre les éléments */
 				align-items: center; /* Aligner les éléments au centre verticalement */
 			}
-			
+
 			/* Style des liens de médias sociaux */
 			.social-links a {
 				margin-right: 30px; /* Espacement entre les icônes */
 				color: #fff; /* Couleur du texte des icônes */
 				font-size: 24px; /* Taille des icônes */
 			}
-			
-			
+
 			/* Style de la section de publication */
 			.publication {
 				display: flex; /* Utiliser Flexbox pour aligner les éléments */
 				align-items: center; /* Aligner les éléments au centre verticalement */
 			}
-			
+
 			.publication img {
 				width: 50px; /* Ajuster la largeur de l'image selon vos besoins */
 				height: auto; /* Ajuster automatiquement la hauteur pour conserver les proportions */
 				margin-right: 10px; /* Espacement entre le logo et le texte */
 			}
-			
+
 			.publication p {
 				font-size: 14px; /* Taille du texte */
 				margin: 0; /* Supprimer les marges autour du paragraphe */
@@ -380,13 +382,13 @@
 		<section class="main">
 			<header>
 				<img
-					src="..\static\assets\img\acceuil.jpg"alt="Welcoming Person"
+					src="..\static\assets\img\acceuil.jpg"
+					alt="Welcoming Person"
 					class="header-image"
 				/>
 				<nav class="header-nav">
 					<h1></h1>
 					<div class="action-buttons">
-						
 						<button class="toggle-menu">
 							<i class="fa-solid fa-bars"></i>
 						</button>
@@ -395,17 +397,14 @@
 						<a href="">Mon profil</a>
 						<a href="">Mon Cv</a>
 						<a href="">Log out</a>
-						
 					</div>
 				</nav>
 				<div class="header-content">
 					<h1>Bienvenue sur notre site web!</h1>
-                    <h4>Explorez des opportunités de carrière passionnantes avec nous !</h4>
-					<form
-						action="{% url 'search-job-offers' %}"
-						method="GET"
-						class="search-bar"
-					>
+					<h4>
+						Explorez des opportunités de carrière passionnantes avec nous !
+					</h4>
+					<form method="GET" class="search-bar">
 						<input
 							class="search-bar-input"
 							type="text"
@@ -447,6 +446,41 @@
 			</div>
 		</section>
 
+		<footer>
+			<h3>Contact us</h3>
+			<div class="footer-content">
+				<div class="social-links">
+					<a
+						href="https://www.instagram.com/csec.ensa.m?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+						target="_blank"
+						><i class="fab fa-instagram"></i
+					></a>
+					<a href="https://www.facebook.com/ClubInfoEnsa" target="_blank"
+						><i class="fab fa-facebook"></i
+					></a>
+					<a
+						href="https://www.linkedin.com/votre_compte_linkedin"
+						target="_blank"
+						><i class="fab fa-linkedin"></i
+					></a>
+				</div>
+				<div class="publication">
+					<img src="..\static\assets\img\logo.jpg" alt="Votre logo" />
+					<p>
+						Computer Science Engeneering club<br />
+						Ensa-Marrakech
+					</p>
+					<br />
+				</div>
+				<div class="publication">
+					<img src="..\static\assets\img\logoENSA.png" alt="Ensalogo" />
+				</div>
+				<div class="copyright">
+					&copy; 2024 Mon Site Web. Tous droits réservés.
+				</div>
+			</div>
+		</footer>
+
 		<script>
 			const menuButton = document.body.querySelector(".toggle-menu");
 			const menuContent = document.body.querySelector(".menu-content");
@@ -465,26 +499,4 @@
 			});
 		</script>
 	</body>
-    <footer>
-        <h3>Contact us </h3>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="https://www.instagram.com/csec.ensa.m?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/ClubInfoEnsa" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.linkedin.com/votre_compte_linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
-            </div>
-            <div class="publication">
-                <img src="..\static\assets\img\logo.jpg" alt="Votre logo">
-          <p> Computer Science Engeneering club<br>
-            Ensa-Marrakech</p><br></div>
-            <div class="publication">
-          <img src="..\static\assets\img\logoENSA.png" alt="Ensalogo">
-            </div>
-            <div class="copyright">
-                &copy; 2024 Mon Site Web. Tous droits réservés.
-            </div>
-         
-        </div>
-    </footer>
-
 </html>
