@@ -20,7 +20,7 @@ def home(request):
     context = {
         'home_page': "active",
     }
-    return render(request, 'condidat.html', context)
+    return render(request, 'templates/condidat.html', context)
 
 def job_search_list(request):
     query = request.GET.get('p')
@@ -64,7 +64,7 @@ def job_search_list(request):
         'jobs': page_obj,
         'query': query,
     }
-    return render(request, 'condidat.html', context)
+    return render(request, 'templates/condidat.html', context)
 
 def job_detail(request, slug):
     job = get_object_or_404(Job, slug=slug)
@@ -98,7 +98,7 @@ def job_detail(request, slug):
         if i not in relevant_jobs and i != job:
             relevant_jobs.append(i)
 
-    return render(request, 'offer-details.html', {'job': job, 'profile': profile, 'apply_button': apply_button, 'save_button': save_button, 'relevant_jobs': relevant_jobs, 'candidate_navbar': 1})
+    return render(request, 'templates/offer-details.html', {'job': job, 'profile': profile, 'apply_button': apply_button, 'save_button': save_button, 'relevant_jobs': relevant_jobs, 'candidate_navbar': 1})
 
 @login_required
 def intelligent_search(request):
@@ -134,7 +134,7 @@ def intelligent_search(request):
         'jobs': objects,
         'counter': len(relevant_jobs),
     }
-    return render(request, 'condidat.html', context)
+    return render(request, 'templates/condidat.html', context)
 
 @login_required
 def my_profile(request):
@@ -157,7 +157,7 @@ def my_profile(request):
         'form': form,
         'profile_page': "active",
     }
-    return render(request, 'condidat.html', context)
+    return render(request, 'templates/condidat.html', context)
 
 @login_required
 def edit_profile(request):
@@ -187,7 +187,7 @@ def profile_view(request, slug):
         'profile': p,
         'skills': user_skills,
     }
-    return render(request, 'condidat.html', context)
+    return render(request, 'templates/condidat.html', context)
 
 def candidate_details(request):
     return render(request, 'condidat.html')
