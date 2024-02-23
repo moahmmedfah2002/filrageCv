@@ -64,7 +64,7 @@ def job_search_list(request):
         'jobs': page_obj,
         'query': query,
     }
-    return render(request, 'templates/condidat.html', context)
+    return render(request, 'condidat.html', context)
 
 def job_detail(request, slug):
     job = get_object_or_404(Job, slug=slug)
@@ -98,7 +98,7 @@ def job_detail(request, slug):
         if i not in relevant_jobs and i != job:
             relevant_jobs.append(i)
 
-    return render(request, 'templates/offer-details.html', {'job': job, 'profile': profile, 'apply_button': apply_button, 'save_button': save_button, 'relevant_jobs': relevant_jobs, 'candidate_navbar': 1})
+    return render(request, 'offer-details.html', {'job': job, 'profile': profile, 'apply_button': apply_button, 'save_button': save_button, 'relevant_jobs': relevant_jobs, 'candidate_navbar': 1})
 
 @login_required
 def intelligent_search(request):
