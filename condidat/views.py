@@ -75,6 +75,10 @@ def search_job_offers(request):
 
     if query:
         query = query.lower()
+        """
+            This logic will change when using real data from database
+            to use the built in functions of sqlite
+        """
         filtered_offers = [
             job_offer
             for job_offer in fake_data_for_testing
