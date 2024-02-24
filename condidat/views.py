@@ -16,17 +16,78 @@ from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 
 
+"""
+    This Data will come from a db or ...
+    Testing purposes only HERE.
+"""
+fake_data_for_testing = [
+    {
+        "title": "Web Developer",
+        "description": "We are looking for a skilled web developer to join our team. The ideal candidate should have experience in building responsive web applications using modern web technologies.",
+        "skills": ["HTML", "CSS", "JavaScript", "React", "Node.js"],
+    },
+    {
+        "title": "Frontend Engineer",
+        "description": "Join our innovative frontend team to work on cutting-edge web applications. We need someone proficient in JavaScript frameworks like Angular or Vue.js, with a strong eye for design and user experience.",
+        "skills": ["JavaScript", "HTML", "CSS", "Angular", "Vue.js"],
+    },
+    {
+        "title": "Backend Developer",
+        "description": "We're seeking a backend developer to help build and maintain robust server-side applications. Experience with databases, server frameworks like Express.js, and proficiency in languages like Python or Java are required.",
+        "skills": ["Node.js", "Express.js", "Python", "Java", "SQL"],
+    },
+    {
+        "title": "Electronics Engineer",
+        "description": "Exciting opportunity for an electronics engineer to work on cutting-edge projects. The ideal candidate will have experience with circuit design, PCB layout, and proficiency in simulation software like SPICE.",
+        "skills": [
+            "Circuit Design",
+            "PCB Layout",
+            "SPICE",
+            "Analog Electronics",
+            "Digital Electronics",
+        ],
+    },
+    {
+        "title": "Embedded Systems Developer",
+        "description": "Join our team of embedded systems developers to work on IoT and embedded projects. Experience with microcontrollers, firmware development, and communication protocols like MQTT or BLE is required.",
+        "skills": [
+            "Embedded Systems",
+            "Microcontrollers",
+            "Firmware Development",
+            "MQTT",
+            "BLE",
+        ],
+    },
+]
+
+
 def home(request):
     context = {
         "home_page": "active",
-        "data": [
-            {
-                "title": "Test title",
-                "description": "Test test test test description",
-                "skills": ["Test", "test", "test"],
-            }
-        ],
+        "data": fake_data_for_testing,
     }
+    return render(request, "condidat.html", context)
+
+
+def search_job_offers(request):
+    query = request.GET.get("search")
+    filtered_offers = []
+
+    if query:
+        query = query.lower()
+        filtered_offers = [
+            job_offer
+            for job_offer in fake_data_for_testing
+            if (
+                query in job_offer["title"].lower()
+                or query in job_offer["description"].lower()
+                or any(query in skill.lower() for skill in job_offer["skills"])
+            )
+        ]
+    else:
+        filtered_offers = fake_data_for_testing
+
+    context = {"data": filtered_offers, "query": query}
     return render(request, "condidat.html", context)
 
 

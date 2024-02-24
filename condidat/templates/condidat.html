@@ -404,7 +404,11 @@
 					<h4>
 						Explorez des opportunités de carrière passionnantes avec nous !
 					</h4>
-					<form method="GET" class="search-bar">
+					<form
+						action="{% url 'search-job-offers' %}"
+						method="GET"
+						class="search-bar"
+					>
 						<input
 							class="search-bar-input"
 							type="text"
