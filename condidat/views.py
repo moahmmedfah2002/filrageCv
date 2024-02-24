@@ -18,25 +18,35 @@ from django.core.paginator import Paginator
 
 def home(request):
     context = {
-        'home_page': "active",
+        "home_page": "active",
+        "data": [
+            {
+                "title": "Test title",
+                "description": "Test test test test description",
+                "skills": ["Test", "test", "test"],
+            }
+        ],
     }
-    return render(request, 'condidat.html', context)
+    return render(request, "condidat.html", context)
+
 
 def job_search_list(request):
-    query = request.GET.get('p')
-    loc = request.GET.get('q')
+    query = request.GET.get("p")
+    loc = request.GET.get("q")
     object_list = []
-    if(query == None):
+    if query == None:
         object_list = Job.objects.all()
     else:
-        title_list = Job.objects.filter(
-            title__icontains=query).order_by('-date_posted')
-        skill_list = Job.objects.filter(
-            skills_req__icontains=query).order_by('-date_posted')
-        company_list = Job.objects.filter(
-            company__icontains=query).order_by('-date_posted')
-        job_type_list = Job.objects.filter(
-            job_type__icontains=query).order_by('-date_posted')
+        title_list = Job.objects.filter(title__icontains=query).order_by("-date_posted")
+        skill_list = Job.objects.filter(skills_req__icontains=query).order_by(
+            "-date_posted"
+        )
+        company_list = Job.objects.filter(company__icontains=query).order_by(
+            "-date_posted"
+        )
+        job_type_list = Job.objects.filter(job_type__icontains=query).order_by(
+            "-date_posted"
+        )
         for i in title_list:
             object_list.append(i)
         for i in skill_list:
@@ -48,23 +58,26 @@ def job_search_list(request):
         for i in job_type_list:
             if i not in object_list:
                 object_list.append(i)
-    if(loc == None):
+    if loc == None:
         locat = Job.objects.all()
     else:
-        locat = Job.objects.filter(
-            location__icontains=loc).order_by('-date_posted')
+        locat = Job.objects.filter(location__icontains=loc).order_by("-date_posted")
     final_list = []
     for i in object_list:
         if i in locat:
             final_list.append(i)
     paginator = Paginator(final_list, 20)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
-        'jobs': page_obj,
-        'query': query,
+        "jobs": page_obj,
+        "query": query,
     }
     return render(request, 'condidat.html', context)
+
+    return render(request, "condidat.html", context)
+
+
 
 def job_detail(request, slug):
     job = get_object_or_404(Job, slug=slug)
@@ -76,12 +89,11 @@ def job_detail(request, slug):
     if SavedJobs.objects.filter(user=request.user).filter(job=job).exists():
         save_button = 1
     relevant_jobs = []
-    jobs1 = Job.objects.filter(
-        company__icontains=job.company).order_by('-date_posted')
-    jobs2 = Job.objects.filter(
-        job_type__icontains=job.job_type).order_by('-date_posted')
-    jobs3 = Job.objects.filter(
-        title__icontains=job.title).order_by('-date_posted')
+    jobs1 = Job.objects.filter(company__icontains=job.company).order_by("-date_posted")
+    jobs2 = Job.objects.filter(job_type__icontains=job.job_type).order_by(
+        "-date_posted"
+    )
+    jobs3 = Job.objects.filter(title__icontains=job.title).order_by("-date_posted")
     for i in jobs1:
         if len(relevant_jobs) > 5:
             break
@@ -100,6 +112,19 @@ def job_detail(request, slug):
 
     return render(request, 'offer-details.html', {'job': job, 'profile': profile, 'apply_button': apply_button, 'save_button': save_button, 'relevant_jobs': relevant_jobs, 'candidate_navbar': 1})
 
+    return render(
+        request,
+        "offer-details.html",
+        {
+            "job": job,
+            "profile": profile,
+            "apply_button": apply_button,
+            "save_button": save_button,
+            "relevant_jobs": relevant_jobs,
+            "candidate_navbar": 1,
+        },
+    )
+
 @login_required
 def intelligent_search(request):
     relevant_jobs = []
@@ -112,8 +137,7 @@ def intelligent_search(request):
     for i in my_skill_query:
         my_skills.append(i.skill.lower())
     if profile:
-        jobs = Job.objects.filter(
-            job_type=profile.looking_for).order_by('-date_posted')
+        jobs = Job.objects.filter(job_type=profile.looking_for).order_by("-date_posted")
     else:
         jobs = Job.objects.all()
     for job in jobs:
@@ -122,60 +146,63 @@ def intelligent_search(request):
         for i in sk:
             skills.append(i.strip().lower())
         common_skills = list(set(my_skills) & set(skills))
-        if (len(common_skills) != 0 and len(common_skills) >= len(skills)//2):
+        if len(common_skills) != 0 and len(common_skills) >= len(skills) // 2:
             relevant_jobs.append(job)
             common.append(len(common_skills))
             job_skills.append(len(skills))
     objects = zip(relevant_jobs, common, job_skills)
-    objects = sorted(objects, key=lambda t: t[1]/t[2], reverse=True)
+    objects = sorted(objects, key=lambda t: t[1] / t[2], reverse=True)
     objects = objects[:100]
     context = {
-        'intel_page': "active",
-        'jobs': objects,
-        'counter': len(relevant_jobs),
+        "intel_page": "active",
+        "jobs": objects,
+        "counter": len(relevant_jobs),
     }
-    return render(request, 'condidat.html', context)
+    return render(request, "condidat.html", context)
+
 
 @login_required
 def my_profile(request):
     you = request.user
     profile = Profile.objects.filter(user=you).first()
     user_skills = Skill.objects.filter(user=you)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = NewSkillForm(request.POST)
         if form.is_valid():
             data = form.save(commit=False)
             data.user = you
             data.save()
-            return redirect('my-profile')
+            return redirect("my-profile")
     else:
         form = NewSkillForm()
     context = {
-        'u': you,
-        'profile': profile,
-        'skills': user_skills,
-        'form': form,
-        'profile_page': "active",
+        "u": you,
+        "profile": profile,
+        "skills": user_skills,
+        "form": form,
+        "profile_page": "active",
     }
-    return render(request, 'condidat.html', context)
+    return render(request, "condidat.html", context)
+
 
 @login_required
 def edit_profile(request):
     you = request.user
     profile = Profile.objects.filter(user=you).first()
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             data = form.save(commit=False)
             data.user = you
             data.save()
-            return redirect('my-profile')
+            return redirect("my-profile")
     else:
         form = ProfileUpdateForm(instance=profile)
     context = {
-        'form': form,
+        "form": form,
     }
-    return render(request, 'condidat.html', context)
+    return render(request, "condidat.html", context)
+
 
 @login_required
 def profile_view(request, slug):
@@ -183,20 +210,22 @@ def profile_view(request, slug):
     you = p.user
     user_skills = Skill.objects.filter(user=you)
     context = {
-        'u': you,
-        'profile': p,
-        'skills': user_skills,
+        "u": you,
+        "profile": p,
+        "skills": user_skills,
     }
-    return render(request, 'condidat.html', context)
+    return render(request, "condidat.html", context)
+
 
 def candidate_details(request):
-    return render(request, 'condidat.html')
+    return render(request, "condidat.html")
+
 
 @login_required
 @csrf_exempt
 def delete_skill(request, pk=None):
-    if request.method == 'POST':
-        id_list = request.POST.getlist('choices')
+    if request.method == "POST":
+        id_list = request.POST.getlist("choices")
         for skill_id in id_list:
             Skill.objects.get(id=skill_id).delete()
-        return redirect('my-profile')
+        return redirect("my-profile")
