@@ -4,26 +4,29 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Détails d'offre</title>
-<<<<<<< HEAD
-=======
-		<link rel="stylesheet" href="offer-details.css">
->>>>>>> a3b675bc966209aa22aeae17a2260729363587fd
+		<!-- <link rel="stylesheet" href="offer-details.css" /> -->
 		<script
 			src="https://kit.fontawesome.com/306bbca739.js"
 			crossorigin="anonymous"
 		></script>
-		<style>/* Reset CSS */
-			body, h1, h2, p, ul, li {
+		<style>
+			/* Reset CSS */
+			body,
+			h1,
+			h2,
+			p,
+			ul,
+			li {
 				margin: 0;
 				padding: 0;
 			}
-			
+
 			/* Body styles */
 			body {
 				font-family: Arial, sans-serif;
 				background-color: #f8f9fa; /* Couleur de fond légère */
 			}
-			
+
 			/* Container styles */
 			.container {
 				max-width: 800px;
@@ -33,26 +36,26 @@
 				border-radius: 10px;
 				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 			}
-			
+
 			/* Header styles */
 			header {
 				text-align: center;
 				margin-bottom: 20px;
 			}
-			
+
 			header h1 {
 				color: #007bff; /* Couleur du titre */
 			}
-			
+
 			.meta {
 				color: #666;
 				margin-top: 10px;
 			}
-			
+
 			.meta p {
 				margin-bottom: 5px;
 			}
-			
+
 			/* Icon styles */
 			.fa-calendar-alt,
 			.fa-map-marker-alt,
@@ -61,23 +64,23 @@
 				font-size: 20px; /* Taille de police des icônes */
 				margin-right: 5px; /* Espacement à droite des icônes */
 			}
-			
+
 			/* Section styles */
 			section {
 				margin-bottom: 20px;
 			}
-			
+
 			section h2 {
 				color: #007bff; /* Couleur bleue pour les titres de section */
 				margin-bottom: 10px;
 			}
-			
+
 			/* List styles */
 			ul {
 				list-style-type: disc;
 				margin-left: 20px;
 			}
-			
+
 			li {
 				color: #666;
 				line-height: 1.6;
@@ -85,10 +88,10 @@
 			/* Cacher le bouton de téléchargement par défaut */
 			input[type="file"] {
 				display: none;
-			  }
-			  
-			  /* Style personnalisé du bouton de téléchargement */
-			  .custom-file-upload {
+			}
+
+			/* Style personnalisé du bouton de téléchargement */
+			.custom-file-upload {
 				display: inline-block;
 				padding: 10px 20px;
 				background-color: #007bff;
@@ -97,11 +100,10 @@
 				border-radius: 5px;
 				cursor: pointer;
 				transition: background-color 0.3s ease;
-			  }
-			  
-			 /* Reset CSS */
-			 
-			
+			}
+
+			/* Reset CSS */
+
 			/* Style pour le formulaire */
 			form {
 				display: flex;
@@ -109,7 +111,7 @@
 				align-items: center;
 				margin-top: 50px;
 			}
-			
+
 			/* Style pour le label du bouton de téléchargement */
 			label {
 				background-color: #007bff; /* Couleur de fond bleue */
@@ -119,114 +121,107 @@
 				cursor: pointer;
 				transition: background-color 0.3s ease;
 			}
-			
+
 			/* Style pour le bouton Filtrer */
 			button {
-				
 				margin-top: 20px;
 				padding: 10px 20px;
 				background-color: #007bff; /* Couleur de fond bleue */
-				color:white ; /* Couleur du texte blanc */
+				color: white; /* Couleur du texte blanc */
 				border-radius: 5px;
 				cursor: pointer;
 				transition: background-color 0.3s ease;
 			}
-			
+
 			/* Style au survol du label */
 			label:hover {
 				background-color: #0056b3; /* Couleur de fond bleue plus foncée au survol */
 			}
-			
+
 			/* Style au survol du bouton */
 			button:hover {
 				background-color: #0056b3; /* Couleur de fond bleue plus foncée au survol */
 			}
-			
-			  
-			  </style>
+		</style>
 	</head>
 	<body>
-<<<<<<< HEAD
-		<h1>{{ offer.title }}</h1>
-		<p>{{ offer.description }}</p>
-=======
-		<!--<h1>{{ offer.title }}</h1>
-		<p>{{ offer.description }}</p>-->
-		<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails d'offre</title>
-    <link rel="stylesheet" href="offersdetails.css">
-    <script src="https://kit.fontawesome.com/306bbca739.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>{{ offer.title }}</h1>
-            <div class="meta">
-                <p><i class="far fa-calendar-alt"></i> Date de publication : {{ offer.date }}</p>
-                <p><i class="fas fa-map-marker-alt"></i> Lieu : {{ offer.location }}</p>
-                <p><i class="fas fa-clock"></i> Durée : {{ offer.duration }}</p>
-            </div>
-        </header>
-        <hr>
-        <section class="description">
-            <h2>Description de l'offre :</h2>
-            <p>{{ offer.description }}</p>
-        </section>
-        <section class="requirements">
-            <h2>Exigences :</h2>
-            <ul>
-                <li>Diplôme universitaire en informatique, génie logiciel ou dans un domaine connexe.</li>
-                <li>Expérience avérée dans le développement web, de préférence avec des langages tels que HTML, CSS, JavaScript, et des frameworks comme React, Angular ou Vue.js.</li>
-                <li>Connaissance des langages de programmation back-end tels que Python, Ruby, Node.js, ou PHP.</li>
-                <li>Expérience avec les bases de données relationnelles et non relationnelles.</li>
-                <li>Fortes compétences en résolution de problèmes et capacité à travailler de manière autonome.</li>
-                <li>Capacité à collaborer efficacement avec une équipe multidisciplinaire.</li>
-                <li>Excellentes compétences en communication écrite et verbale.</li>
-            </ul>
-        </section>
-        <section class="benefits">
-            <h2>Avantages :</h2>
-            <ul>
-                <li>Environnement de travail stimulant et collaboratif.</li>
-                <li>Possibilités d'apprentissage et de développement professionnel.</li>
-                <li>Salaire compétitif et avantages sociaux attrayants.</li>
-                <li>Flexibilité horaire et possibilité de télétravail.</li>
-            </ul>
-        </section>
-    </div>
-	<p>Les candidats intéressés sont invités à telecharger  leur CV  , afin d'etre filtrer </p>
-	<form method="post" enctype="multipart/form-data">
-		<div>
-		  <label for="file">Sélectionner le fichier à envoyer</label>
-		  <input type="file" id="file" name="file" multiple accept=".pdf" />
+		<div class="container">
+			<header>
+				<h1>{{ offer.title }}</h1>
+				<div class="meta">
+					<p>
+						<i class="far fa-calendar-alt"></i> Date de publication:
+						<span>{{ offer.date }}</span>
+					</p>
+					<p>
+						<i class="fas fa-map-marker-alt"></i> Lieu:
+						<span>{{ offer.location }}</span>
+					</p>
+					<p>
+						<i class="fas fa-clock"></i> Durée:
+						<span>{{ offer.duration }}</span>
+					</p>
+				</div>
+			</header>
+			<hr />
+			<section class="description">
+				<h2>Description de l'offre :</h2>
+				<p>{{ offer.description }}</p>
+			</section>
+			<section class="requirements">
+				<h2>Exigences :</h2>
+				<ul>
+					{% for requirement in offer.requirements %}
+					<li>{{ requirement }}</li>
+					{% endfor %}
+				</ul>
+			</section>
+			<section class="benefits">
+				<h2>Avantages :</h2>
+				<ul>
+					{% for advantage in offer.advantages %}
+					<li>{{ advantage }}</li>
+					{% endfor %}
+				</ul>
+			</section>
 		</div>
-		<div>
-		  <button>Filtrer</button>
-		</div>
-	  </form>
-	  
-
-	<footer>
-		<h3>Contact us </h3>
-		<div class="footer-content">
-			<div class="social-links">
-				<a href="https://www.instagram.com/csec.ensa.m?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
-				<a href="https://www.facebook.com/ClubInfoEnsa" target="_blank"><i class="fab fa-facebook"></i></a>
-				<a href="https://www.linkedin.com/votre_compte_linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+		<p>
+			Les candidats intéressés sont invités à telecharger leur CV, afin d'etre
+			filtrer
+		</p>
+		<form method="post" enctype="multipart/form-data">
+			<div>
+				<label for="file">Sélectionner le fichier à envoyer</label>
+				<input type="file" id="file" name="file" multiple accept=".pdf" />
 			</div>
-		
-	
-			<div class="copyright">
-				&copy; 2024 Mon Site Web. Tous droits réservés.
+			<div>
+				<button>Filtrer</button>
 			</div>
-		 
-		</div>
-	</footer>
+		</form>
 
->>>>>>> a3b675bc966209aa22aeae17a2260729363587fd
+		<footer>
+			<h3>Contact us</h3>
+			<div class="footer-content">
+				<div class="social-links">
+					<a
+						href="https://www.instagram.com/csec.ensa.m?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+						target="_blank"
+						><i class="fab fa-instagram"></i
+					></a>
+					<a href="https://www.facebook.com/ClubInfoEnsa" target="_blank"
+						><i class="fab fa-facebook"></i
+					></a>
+					<a
+						href="https://www.linkedin.com/votre_compte_linkedin"
+						target="_blank"
+						><i class="fab fa-linkedin"></i
+					></a>
+				</div>
+
+				<div class="copyright">
+					&copy; 2024 Mon Site Web. Tous droits réservés.
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>

@@ -1,5 +1,10 @@
 /* Reset CSS */
-body, h1, h2, p, ul, li {
+body,
+h1,
+h2,
+p,
+ul,
+li {
     margin: 0;
     padding: 0;
 }
@@ -7,7 +12,8 @@ body, h1, h2, p, ul, li {
 /* Body styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa; /* Couleur de fond légère */
+    background-color: #f8f9fa;
+    /* Couleur de fond légère */
 }
 
 /* Container styles */
@@ -27,7 +33,8 @@ header {
 }
 
 header h1 {
-    color: #007bff; /* Couleur du titre */
+    color: #007bff;
+    /* Couleur du titre */
 }
 
 .meta {
@@ -43,9 +50,12 @@ header h1 {
 .fa-calendar-alt,
 .fa-map-marker-alt,
 .fa-clock {
-    color: #007bff; /* Couleur bleue pour les icônes */
-    font-size: 20px; /* Taille de police des icônes */
-    margin-right: 5px; /* Espacement à droite des icônes */
+    color: #007bff;
+    /* Couleur bleue pour les icônes */
+    font-size: 20px;
+    /* Taille de police des icônes */
+    margin-right: 5px;
+    /* Espacement à droite des icônes */
 }
 
 /* Section styles */
@@ -54,7 +64,8 @@ section {
 }
 
 section h2 {
-    color: #007bff; /* Couleur bleue pour les titres de section */
+    color: #007bff;
+    /* Couleur bleue pour les titres de section */
     margin-bottom: 10px;
 }
 
@@ -68,13 +79,14 @@ li {
     color: #666;
     line-height: 1.6;
 }
+
 /* Cacher le bouton de téléchargement par défaut */
 input[type="file"] {
     display: none;
-  }
-  
-  /* Style personnalisé du bouton de téléchargement */
-  .custom-file-upload {
+}
+
+/* Style personnalisé du bouton de téléchargement */
+.custom-file-upload {
     display: inline-block;
     padding: 10px 20px;
     background-color: #007bff;
@@ -83,10 +95,10 @@ input[type="file"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
- /* Reset CSS */
- 
+}
+
+/* Reset CSS */
+
 
 /* Style pour le formulaire */
 form {
@@ -98,8 +110,10 @@ form {
 
 /* Style pour le label du bouton de téléchargement */
 label {
-    background-color: #007bff; /* Couleur de fond bleue */
-    color: #fff; /* Couleur du texte blanc */
+    background-color: #007bff;
+    /* Couleur de fond bleue */
+    color: #fff;
+    /* Couleur du texte blanc */
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -110,8 +124,10 @@ label {
 button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff; /* Couleur de fond bleue */
-    color: #fff; /* Couleur du texte blanc */
+    background-color: #007bff;
+    /* Couleur de fond bleue */
+    color: #fff;
+    /* Couleur du texte blanc */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -119,13 +135,12 @@ button {
 
 /* Style au survol du label */
 label:hover {
-    background-color: #0056b3; /* Couleur de fond bleue plus foncée au survol */
+    background-color: #0056b3;
+    /* Couleur de fond bleue plus foncée au survol */
 }
 
 /* Style au survol du bouton */
 button:hover {
-    background-color: #0056b3; /* Couleur de fond bleue plus foncée au survol */
+    background-color: #0056b3;
+    /* Couleur de fond bleue plus foncée au survol */
 }
-
-  
-  

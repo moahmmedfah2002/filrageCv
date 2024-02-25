@@ -440,7 +440,10 @@
 							{% endfor %}
 						</div>
 					</div>
-					<a href="{{ offer.title|slugify }}" class="offer-apply-button">
+					<a
+						href="/condidat/job/{{ offer.title|slugify }}"
+						class="offer-apply-button"
+					>
 						Postuler
 					</a>
 				</div>
